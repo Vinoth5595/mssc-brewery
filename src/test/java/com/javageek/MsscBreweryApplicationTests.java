@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javageek.web.controller.v2.BeerControllerV2;
-import com.javageek.web.model.BeerDto;
+import com.javageek.web.mappers.BeerMapper;
 import com.javageek.web.model.v2.BeerDtoV2;
 import com.javageek.web.model.v2.BeerStyleEnum;
 import com.javageek.web.services.v2.BeerServiceV2;
@@ -26,6 +26,9 @@ class MsscBreweryApplicationTests {
 	
 	@MockBean
 	BeerServiceV2 beerServiceV2;
+	
+	@MockBean
+	BeerMapper beerMapper;
 	
 	@Autowired
 	MockMvc mockMvc;

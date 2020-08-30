@@ -1,11 +1,9 @@
-package com.javageek.web.model.v2;
+package com.javageek.web.domain;
 
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Positive;
+import com.javageek.web.model.v2.BeerStyleEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,18 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDtoV2 {
-	
-	@Null
+public class Beer {
+
 	private UUID id;
 	
-	@NotBlank
 	private String beerName;
 	
 	private BeerStyleEnum beerStyle;
 	
-	@Positive
 	private Long upc;
 	
-	private OffsetDateTime createdDateTime;
+	private Timestamp createdDateTime;
 }
