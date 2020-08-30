@@ -1,11 +1,17 @@
 package com.javageek.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,17 +40,17 @@ public class CustomerController {
 	}
 
 	@PostMapping
-	public ResponseEntity createNewCustomer(@RequestBody CustomerDto customerDto) {
+	public ResponseEntity createNewCustomer(@Valid @RequestBody CustomerDto customerDto) {
 		CustomerDto saveDto = customerService.saveCustomer(customerDto);
 
 		HttpHeaders header = new HttpHeaders();
-		header.add("Location", "/api/v1/customer/" + saveDto.getCustomerId().toString());
+		//header.add("Location", "/api/v1/customer/" + saveDto.getCustomerId().toString());
 		return new ResponseEntity(header, HttpStatus.CREATED);
 	}
 
 	@PutMapping({ "/{customerId}" })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateCustomer(@PathVariable UUID customerId, @RequestBody CustomerDto customerDto) {
+	public void updateCustomer(@PathVariable UUID customerId, @Valid @RequestBody CustomerDto customerDto) {
 		customerService.updateCustomerById(customerId, customerDto);
 	}
 	
@@ -53,4 +59,5 @@ public class CustomerController {
 	public void deleteCustomer(@PathVariable UUID customerId) {
 		customerService.deleteById(customerId);
 	}
+	
 }
